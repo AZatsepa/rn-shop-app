@@ -1,15 +1,29 @@
 import React from 'react';
-import { string } from 'prop-types';
-import {
-  FlatList, StyleSheet,
-} from 'react-native';
+import { FlatList } from 'react-native';
+import { useSelector } from 'react-redux';
 
-const styles = StyleSheet.create({});
+import ProductItem from '../../components/shop/ProductItem';
 
 const ProductsOverviewScreen = () => {
+  const products = useSelector((state) => state.product.availableProducts);
   return (
-    <FlatList />
+    <FlatList
+      data={products}
+      renderItem={(itemData) => (
+        <ProductItem
+          onAddToCart={() => {}}
+          image={itemData.item.imageUrl}
+          price={itemData.item.price}
+          title={itemData.item.title}
+          onViewDetail={() => {}}
+        />
+      )}
+    />
   );
+};
+
+ProductsOverviewScreen.navigationOptions = {
+  headerTitle: 'All Products',
 };
 
 ProductsOverviewScreen.propTypes = {};
