@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
   },
   price: {
     color: Colors.gray,
+    fontFamily: 'open-sans-bold',
     fontSize: 14,
   },
   product: {
@@ -48,6 +49,7 @@ const styles = StyleSheet.create({
     shadowRadius: 8, // iOS only
   },
   title: {
+    fontFamily: 'open-sans-bold',
     fontSize: 18,
     marginVertical: 4,
   },

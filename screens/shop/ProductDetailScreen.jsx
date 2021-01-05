@@ -11,6 +11,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   description: {
+    fontFamily: 'openSans',
     fontSize: 14,
     marginHorizontal: 20,
     textAlign: 'center',
@@ -21,6 +22,7 @@ const styles = StyleSheet.create({
   },
   price: {
     color: Colors.gray,
+    fontFamily: 'openSansBold',
     fontSize: 20,
     marginVertical: 20,
     textAlign: 'center',
