@@ -1,11 +1,13 @@
 import React from 'react';
 import {
-  ScrollView, View, Text, Image, Button, StyleSheet,
+  ScrollView, View, Text, Image, Button, StyleSheet, Platform,
 } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
+import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
 import Colors from '../../constants/colors';
 import { addToCart } from '../../store/actions/cart';
+import CustomHeaderButton from '../../components/UI/CustomHeaderButton';
 
 const styles = StyleSheet.create({
   actions: {
@@ -60,6 +62,15 @@ const ProductDetailScreen = ({ navigation }) => {
 ProductDetailScreen.navigationOptions = (navData) => (
   {
     headerTitle: navData.navigation.getParam('productTitle'),
+    headerRight: () => (
+      <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+        <Item
+          title="Cart"
+          iconName={Platform.OS === 'android' ? 'ios-cart' : 'ios-cart'}
+          onPress={() => navData.navigation.navigate('Cart')}
+        />
+      </HeaderButtons>
+    ),
   }
 );
 
