@@ -1,8 +1,10 @@
 import React from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, Platform } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
+import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
 import ProductItem from '../../components/shop/ProductItem';
+import CustomHeaderButton from '../../components/UI/CustomHeaderButton';
 import { addToCart } from '../../store/actions/cart';
 
 const ProductsOverviewScreen = ({ navigation }) => {
@@ -27,9 +29,22 @@ const ProductsOverviewScreen = ({ navigation }) => {
   );
 };
 
-ProductsOverviewScreen.navigationOptions = {
-  headerTitle: 'All Products',
-};
+ProductsOverviewScreen.navigationOptions = (navData) => {
+  return (
+    {
+      headerTitle: 'All Products',
+      headerRight: () => (
+        <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+          <Item
+            title="Cart"
+            iconName={Platform.OS === 'android' ? 'ios-cart' : 'ios-cart'}
+            onPress={() => navData.navigation.navigate('Cart')}
+          />
+        </HeaderButtons>
+      ),
+    }
+  );
+}
 
 ProductsOverviewScreen.propTypes = {};
 

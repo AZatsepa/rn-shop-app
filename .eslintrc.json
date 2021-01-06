@@ -35,7 +35,8 @@
             2,
             {
                 "skip": [
-                    "DefaultText"
+                    "DefaultText",
+                    "Text.Text"
                 ]
             }
         ],
