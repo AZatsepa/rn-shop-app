@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
 const ProductDetailScreen = ({ navigation }) => {
   const productId = navigation.getParam('productId');
   const selectedProduct = useSelector(
-    (state) => state.product.availableProducts.find((prod) => prod.id === productId),
+    (state) => state.products.availableProducts.find((prod) => prod.id === productId),
   );
   const dispatch = useDispatch();
 

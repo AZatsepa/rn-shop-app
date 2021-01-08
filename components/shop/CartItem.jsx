@@ -1,5 +1,7 @@
 import React from 'react';
-import { string, number, func } from 'prop-types';
+import {
+  string, number, func, bool,
+} from 'prop-types';
 import {
   View, Text, StyleSheet, TouchableOpacity, Platform,
 } from 'react-native';
@@ -34,7 +36,7 @@ const styles = StyleSheet.create({
 });
 
 const CartItem = ({
-  quantity, productTitle, sum, onRemove,
+  quantity, productTitle, sum, onRemove, deletable,
 }) => (
   <View style={styles.cartItem}>
     <Text style={styles.itemData}>
@@ -49,21 +51,29 @@ const CartItem = ({
         $&nbsp;
         {sum.toFixed(2)}
       </Text>
-      <TouchableOpacity
-        onPress={onRemove}
-        style={styles.deleteButton}
-      >
-        <Ionicons name={Platform.OS === 'android' ? 'md-trash' : 'ios-trash'} size={23} color={Colors.red} />
-      </TouchableOpacity>
+      {deletable
+      && (
+        <TouchableOpacity
+          onPress={onRemove}
+          style={styles.deleteButton}
+        >
+          <Ionicons name={Platform.OS === 'android' ? 'md-trash' : 'ios-trash'} size={23} color={Colors.red} />
+        </TouchableOpacity>
+      )}
     </View>
   </View>
 );
+
+CartItem.defaultProps = {
+  deletable: false,
+};
 
 CartItem.propTypes = {
   quantity: number.isRequired,
   productTitle: string.isRequired,
   sum: number.isRequired,
   onRemove: func.isRequired,
+  deletable: bool,
 };
 
 export default CartItem;

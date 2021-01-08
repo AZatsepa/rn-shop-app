@@ -8,7 +8,7 @@ import CustomHeaderButton from '../../components/UI/CustomHeaderButton';
 import { addToCart } from '../../store/actions/cart';
 
 const ProductsOverviewScreen = ({ navigation }) => {
-  const products = useSelector((state) => state.product.availableProducts);
+  const products = useSelector((state) => state.products.availableProducts);
   const dispatch = useDispatch();
   return (
     <FlatList
@@ -32,11 +32,20 @@ const ProductsOverviewScreen = ({ navigation }) => {
 ProductsOverviewScreen.navigationOptions = (navData) => (
   {
     headerTitle: 'All Products',
+    headerLeft: () => (
+      <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+        <Item
+          title="Menu"
+          iconName={Platform.OS === 'android' ? 'md-menu' : 'ios-menu'}
+          onPress={() => navData.navigation.toggleDrawer()}
+        />
+      </HeaderButtons>
+    ),
     headerRight: () => (
       <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
         <Item
           title="Cart"
-          iconName={Platform.OS === 'android' ? 'ios-cart' : 'ios-cart'}
+          iconName={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
           onPress={() => navData.navigation.navigate('Cart')}
         />
       </HeaderButtons>

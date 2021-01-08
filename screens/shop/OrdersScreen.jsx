@@ -1,17 +1,44 @@
 import React from 'react';
-import { string } from 'prop-types';
-import { View, Text, StyleSheet } from 'react-native';
+import {
+  View, FlatList, Platform,
+} from 'react-native';
+import { useSelector } from 'react-redux';
+import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
-const styles = StyleSheet.create({});
+import CustomHeaderButton from '../../components/UI/CustomHeaderButton';
+import OrderItem from '../../components/shop/OrderItem';
 
 const OrdersScreen = () => {
+  const orders = useSelector((state) => state.orders.orders);
   return (
     <View>
-      <Text></Text>
+      <FlatList
+        data={orders}
+        renderItem={(itemData) => (
+          <OrderItem
+            amount={itemData.item.totalAmount}
+            date={itemData.item.readableDate}
+            items={itemData.item.items}
+          />
+        )}
+      />
     </View>
   );
 };
 
-OrdersScreen.propTypes = {};
+OrdersScreen.navigationOptions = (navData) => (
+  {
+    headerTitle: 'Your Orders',
+    headerLeft: () => (
+      <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+        <Item
+          title="Menu"
+          iconName={Platform.OS === 'android' ? 'md-menu' : 'ios-menu'}
+          onPress={() => navData.navigation.toggleDrawer()}
+        />
+      </HeaderButtons>
+    ),
+  }
+);
 
 export default OrdersScreen;
