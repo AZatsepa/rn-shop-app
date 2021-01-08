@@ -26,6 +26,13 @@
         "react-native"
     ],
     "rules": {
+        "max-len": [
+            2,
+            {
+                "code": 120,
+                "ignoreUrls": true
+            }
+        ],
         "react/style-prop-object": 0,
         "react-native/no-unused-styles": 2,
         "react-native/split-platform-components": 2,

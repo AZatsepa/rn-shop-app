@@ -1,7 +1,7 @@
 import React from 'react';
 import { string, number, func } from 'prop-types';
 import {
-  View, Text, Image, StyleSheet, Button, TouchableOpacity, TouchableNativeFeedback, Platform,
+  View, Text, Image, StyleSheet, TouchableOpacity, TouchableNativeFeedback, Platform,
 } from 'react-native';
 import Colors from '../../constants/colors';
 
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
 });
 
 const ProductItem = ({
-  title, price, image, onViewDetail, onAddToCart,
+  title, price, image, onSelect, children,
 }) => {
   let TouchableComponent = TouchableOpacity;
   if (Platform.OS === 'android' && Platform.Version >= 21) {
@@ -69,7 +69,7 @@ const ProductItem = ({
   return (
     <View style={styles.product}>
       <View style={styles.touchable}>
-        <TouchableComponent onPress={onViewDetail} useForeground>
+        <TouchableComponent onPress={onSelect} useForeground>
           <View>
             <View style={styles.imageContainer}>
               <Image style={styles.image} source={{ uri: image }} />
@@ -82,8 +82,7 @@ const ProductItem = ({
               </Text>
             </View>
             <View style={styles.actions}>
-              <Button color={Colors.primary} title="View Details" onPress={onViewDetail} />
-              <Button color={Colors.primary} title="To Cart" onPress={onAddToCart} />
+              {children}
             </View>
           </View>
         </TouchableComponent>
@@ -96,8 +95,7 @@ ProductItem.propTypes = {
   title: string.isRequired,
   price: number.isRequired,
   image: string.isRequired,
-  onViewDetail: func.isRequired,
-  onAddToCart: func.isRequired,
+  onSelect: func.isRequired,
 };
 
 export default ProductItem;

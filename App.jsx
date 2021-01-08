@@ -7,13 +7,13 @@ import AppLoading from 'expo-app-loading';
 // eslint-disable-next-line no-unused-vars
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-import productReducer from './store/reducers/products';
+import productsReducer from './store/reducers/products';
 import cartReducer from './store/reducers/cart';
 import ordersReducer from './store/reducers/orders';
 import ShopNavigator from './navigation/ShopNavigator';
 
 const rootReducer = combineReducers({
-  products: productReducer,
+  products: productsReducer,
   cart: cartReducer,
   orders: ordersReducer,
 });
